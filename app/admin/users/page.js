@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import { verifyAuth, hasRole } from '@/lib/auth';

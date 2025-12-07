@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic";
 import { redirect } from 'next/navigation';
 import { verifyAuth, hasRole } from '@/lib/auth';
 import AdminLayout from '@/components/AdminLayout';

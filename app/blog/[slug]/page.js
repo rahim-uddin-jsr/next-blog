@@ -3,7 +3,7 @@ import { query } from '@/lib/db';
 import { verifyAuth, hasRole } from '@/lib/auth';
 import Link from 'next/link';
 import CommentsSection from '../components/CommentsSection';
-
+import DOMPurify from "isomorphic-dompurify";
 async function getPost(slug) {
     const posts = await query(`
     SELECT p.*, u.name as author_name 
@@ -75,11 +75,13 @@ export default async function BlogPostPage({ params }) {
                     </div>
                 </header>
 
-                <div className="post-content-html">
-                    {post.content.split('\n').map((paragraph, index) => (
-                        paragraph.trim() && <p key={index}>{paragraph}</p>
-                    ))}
-                </div>
+                <div
+                    className="post-content-html prose prose-lg max-w-none"
+                    dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.content) }}
+
+                />
+                {post.content}
+
             </article>
 
             <CommentsSection postId={post.id} />

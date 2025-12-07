@@ -22,7 +22,7 @@ export default function PostForm({ initialData = null }) {
     const [newCategoryName, setNewCategoryName] = useState('');
     const [newCategoryParent, setNewCategoryParent] = useState('');
     const [isAddingCategory, setIsAddingCategory] = useState(false);
-
+    const [codeView, setCodeView] = useState(false);
     const [origin, setOrigin] = useState('');
 
     const [formData, setFormData] = useState({
@@ -223,26 +223,45 @@ export default function PostForm({ initialData = null }) {
                     </div>
 
                     <div className="form-group editor-container">
-                        <ReactQuill
-                            theme="snow"
-                            value={formData.content}
-                            onChange={(content) => setFormData(prev => ({ ...prev, content }))}
-                            className="rich-editor"
-                            modules={{
-                                toolbar: [
-                                    [{ 'font': [] }, { 'size': [] }],
-                                    [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-                                    ['bold', 'italic', 'underline', 'strike'],
-                                    [{ 'color': [] }, { 'background': [] }],
-                                    [{ 'script': 'sub' }, { 'script': 'super' }],
-                                    [{ 'header': 1 }, { 'header': 2 }, 'blockquote', 'code-block'],
-                                    [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'indent': '-1' }, { 'indent': '+1' }],
-                                    [{ 'direction': 'rtl' }, { 'align': [] }],
-                                    ['link', 'image', 'video', 'formula'],
-                                    ['clean']
-                                ],
-                            }}
-                        />
+                        <div className="flex justify-end">
+                            <button type='button'
+                                onClick={() => setCodeView(!codeView)}
+                                className="rounded bg-indigo-600 px-3 py-1 text-white hover:bg-indigo-700"
+                            >
+                                {codeView ? "Back to Editor" : "Code View"}
+                            </button>
+                        </div>
+                        {codeView ? (
+                            // Code view: raw HTML
+                            <textarea
+                                value={formData.content}
+                                onChange={(e) => setFormData({ ...formData, content: e.target.value })}
+                                className="w-full h-64 border rounded p-2 font-mono text-sm"
+                            />
+                        ) : (
+                            <ReactQuill
+                                theme="snow"
+                                value={formData.content}
+                                onChange={(content, delta, source, editor) => {
+                                    setFormData(prev => ({ ...prev, content: editor.getHTML() }));
+                                }}
+                                className="rich-editor"
+                                modules={{
+                                    toolbar: [
+                                        [{ 'font': [] }, { 'size': [] }],
+                                        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+                                        ['bold', 'italic', 'underline', 'strike'],
+                                        [{ 'color': [] }, { 'background': [] }],
+                                        [{ 'script': 'sub' }, { 'script': 'super' }],
+                                        [{ 'header': 1 }, { 'header': 2 }, 'blockquote', 'code-block'],
+                                        [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'indent': '-1' }, { 'indent': '+1' }],
+                                        [{ 'direction': 'rtl' }, { 'align': [] }],
+                                        ['link', 'image', 'video', 'formula'],
+                                        ['clean']
+                                    ],
+                                }}
+                            />
+                        )}
                     </div>
                 </div>
 

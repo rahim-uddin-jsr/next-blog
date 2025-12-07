@@ -5,13 +5,16 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "mysql": "mysql -u root -p scripts/setup_mysql.sql"
   },
   "dependencies": {
     "bcryptjs": "^3.0.3",
     "cookie": "^1.1.1",
+    "dompurify": "^3.3.0",
     "dotenv": "^17.2.3",
     "gray-matter": "^4.0.3",
+    "isomorphic-dompurify": "^2.33.0",
     "jsonwebtoken": "^9.0.3",
     "mysql2": "^3.15.3",
     "next": "16.0.7",
