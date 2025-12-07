@@ -1,10 +1,10 @@
 import { NextResponse } from 'next/server';
 
-export async function POST() {
-    const response = NextResponse.json(
-        { message: 'Logout successful' },
-        { status: 200 }
-    );
+export async function POST(request) {
+    // Redirect to homepage after logout
+    const response = NextResponse.redirect(new URL('/', request.url), {
+        status: 303, // See Other
+    });
 
     // Clear the auth cookie
     response.cookies.set('auth-token', '', {
@@ -16,3 +16,4 @@ export async function POST() {
 
     return response;
 }
+

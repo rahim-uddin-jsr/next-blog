@@ -1,0 +1,304 @@
+/* Comments Section & Manager Styles */
+
+/* --- Public Frontend --- */
+
+.comments-container {
+    max-width: 800px;
+    margin: 4rem auto 0;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.comments-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.comments-count {
+    color: var(--text-secondary);
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+.comment-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+.comment-item {
+    display: flex;
+    gap: 1rem;
+    animation: fadeInUp 0.4s ease-out;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    color: white;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+    box-shadow: var(--shadow-sm);
+}
+
+.comment-body {
+    flex: 1;
+}
+
+.comment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.comment-author {
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.comment-date {
+    font-size: 0.8rem;
+    color: var(--text-tertiary);
+}
+
+.comment-content {
+    background: var(--bg-card);
+    /* or bg-tertiary */
+    padding: 1rem;
+    border-radius: 0 var(--radius-lg) var(--radius-lg) var(--radius-lg);
+    color: var(--text-secondary);
+    line-height: 1.6;
+    border: 1px solid var(--border-color);
+}
+
+.comment-empty {
+    text-align: center;
+    padding: 3rem;
+    background: var(--bg-tertiary);
+    border-radius: var(--radius-lg);
+    border: 1px dashed var(--border-color);
+    color: var(--text-secondary);
+}
+
+/* Form */
+.comment-form-card {
+    background: var(--bg-card);
+    padding: 2rem;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-md);
+}
+
+.comment-form-card h4 {
+    margin-bottom: 1.5rem;
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.form-row-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+@media (max-width: 600px) {
+    .form-row-2 {
+        grid-template-columns: 1fr;
+    }
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.form-label span {
+    color: var(--text-tertiary);
+    font-weight: 400;
+}
+
+.btn-submit {
+    padding: 0.75rem 2rem;
+    background: var(--text-primary);
+    /* contrast */
+    color: var(--bg-primary);
+    border: none;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.btn-submit:hover {
+    opacity: 0.9;
+}
+
+.btn-submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+[data-theme='dark'] .btn-submit {
+    background: white;
+    color: black;
+}
+
+.alert-message {
+    padding: 1rem;
+    border-radius: var(--radius-md);
+    margin-bottom: 1.5rem;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.alert-success {
+    background: rgba(16, 185, 129, 0.1);
+    color: #10b981;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.alert-error {
+    background: rgba(239, 68, 68, 0.1);
+    color: #ef4444;
+    border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+/* --- Admin Dashboard --- */
+
+.comments-filter-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    background: var(--bg-tertiary);
+    padding: 0.25rem;
+    border-radius: var(--radius-md);
+    width: fit-content;
+}
+
+.tab-btn {
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-sm);
+    /* smaller radius for inner items */
+    border: none;
+    background: transparent;
+    color: var(--text-secondary);
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s;
+}
+
+.tab-btn.active {
+    background: var(--bg-card);
+    color: var(--text-primary);
+    box-shadow: var(--shadow-sm);
+}
+
+.tab-count {
+    font-size: 0.75rem;
+    background: rgba(0, 0, 0, 0.1);
+    padding: 0.1rem 0.4rem;
+    border-radius: 10px;
+}
+
+[data-theme='dark'] .tab-count {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.comment-status-pill {
+    display: inline-flex;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.status-approved {
+    background: rgba(16, 185, 129, 0.2);
+    color: #10b981;
+}
+
+.status-spam {
+    background: rgba(239, 68, 68, 0.2);
+    color: #ef4444;
+}
+
+.status-pending {
+    background: rgba(245, 158, 11, 0.2);
+    color: #f59e0b;
+}
+
+.author-cell {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.author-info div:first-child {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.author-info div:last-child {
+    font-size: 0.8rem;
+    color: var(--text-tertiary);
+}
+
+.comment-preview {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.table-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    opacity: 0.6;
+    transition: opacity 0.2s;
+}
+
+tr:hover .table-actions {
+    opacity: 1;
+}
+
+.btn-action {
+    padding: 0.4rem;
+    border-radius: var(--radius-sm);
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: background 0.2s;
+}
+
+.btn-action:hover {
+    background: var(--bg-tertiary);
+}

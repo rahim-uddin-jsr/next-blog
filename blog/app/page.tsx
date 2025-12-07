@@ -1,6 +1,9 @@
 import Link from "next/link";
+import { verifyAuth } from "@/lib/auth";
 
-export default function Home() {
+export default async function Home() {
+  const user = await verifyAuth();
+
   return (
     <div className="home-container">
       <div className="home-hero">
@@ -13,9 +16,25 @@ export default function Home() {
           <Link href="/blog" className="btn btn-primary">
             Explore Blog
           </Link>
-          <Link href="/auth/login" className="btn btn-secondary">
-            Login
-          </Link>
+
+          {user ? (
+            <div className="auth-buttons">
+              {user.role !== 'user' && (
+                <Link href="/admin" className="btn btn-secondary">
+                  Dashboard
+                </Link>
+              )}
+              <form action="/api/auth/logout" method="POST" style={{ display: 'inline' }}>
+                <button type="submit" className="btn btn-outline">
+                  Logout
+                </button>
+              </form>
+            </div>
+          ) : (
+            <Link href="/auth/login" className="btn btn-secondary">
+              Login
+            </Link>
+          )}
         </div>
       </div>
 
@@ -41,3 +60,4 @@ export default function Home() {
     </div>
   );
 }
+

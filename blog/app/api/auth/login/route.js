@@ -17,7 +17,7 @@ export async function POST(request) {
 
         // Find user
         const users = await query(
-            'SELECT id, email, password_hash, name FROM users WHERE email = ?',
+            'SELECT id, email, password_hash, name, role FROM users WHERE email = ?',
             [email]
         );
 
@@ -51,10 +51,11 @@ export async function POST(request) {
         const response = NextResponse.json(
             {
                 message: 'Login successful',
-                user: { id: user.id, email: user.email, name: user.name }
+                user: { id: user.id, email: user.email, name: user.name, role: user.role }
             },
             { status: 200 }
         );
+
 
         // Set HTTP-only cookie
         response.cookies.set('auth-token', token, {

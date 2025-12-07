@@ -1,0 +1,200 @@
+/* Forms */
+.form-group {
+    margin-bottom: var(--spacing-lg);
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: var(--spacing-xs);
+    font-weight: 500;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.form-input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    color: var(--text-primary);
+    font-size: 1rem;
+    transition: all 0.2s;
+}
+
+.form-input:focus {
+    border-color: var(--accent-primary);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+}
+
+.form-actions {
+    display: flex;
+    gap: var(--spacing-md);
+    justify-content: flex-end;
+    margin-top: var(--spacing-xl);
+    padding-top: var(--spacing-lg);
+    border-top: 1px solid var(--border-color);
+}
+
+.font-mono {
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.mb-4 {
+    margin-bottom: 1rem;
+}
+
+/* WordPress-style Editor Layout */
+.post-form-layout {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: var(--spacing-lg);
+    align-items: start;
+}
+
+.form-main {
+    min-width: 0;
+    /* Prevent grid overflow */
+}
+
+.post-title-input {
+    width: 100%;
+    padding: var(--spacing-sm) 0;
+    font-size: 2rem;
+    font-weight: 700;
+    border: none;
+    background: transparent;
+    color: var(--text-primary);
+    outline: none;
+}
+
+.post-title-input::placeholder {
+    color: var(--text-tertiary);
+}
+
+.slug-group {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-lg);
+}
+
+.slug-host {
+    color: var(--text-tertiary);
+}
+
+.slug-input {
+    background: transparent;
+    border: 1px solid transparent;
+    padding: 0 4px;
+    color: var(--text-secondary);
+    font-weight: 600;
+    border-radius: 4px;
+}
+
+.slug-input:hover,
+.slug-input:focus {
+    border-color: var(--border-color);
+    background: var(--bg-tertiary);
+}
+
+.btn-icon-small {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 0.875rem;
+    padding: 4px;
+    border-radius: 4px;
+}
+
+.btn-icon-small:hover {
+    background: var(--bg-tertiary);
+}
+
+/* React Quill Overrides */
+.rich-editor .ql-toolbar {
+    border-color: var(--border-color) !important;
+    background: var(--bg-tertiary);
+    border-top-left-radius: var(--radius-md);
+    border-top-right-radius: var(--radius-md);
+}
+
+.rich-editor .ql-container {
+    border-color: var(--border-color) !important;
+    border-bottom-left-radius: var(--radius-md);
+    border-bottom-right-radius: var(--radius-md);
+    background: var(--bg-card);
+    font-family: inherit;
+    font-size: 1rem;
+    min-height: 400px;
+}
+
+.rich-editor .ql-editor {
+    min-height: 400px;
+    color: var(--text-primary);
+}
+
+.rich-editor .ql-stroke {
+    stroke: var(--text-secondary) !important;
+}
+
+.rich-editor .ql-fill {
+    fill: var(--text-secondary) !important;
+}
+
+.rich-editor .ql-picker {
+    color: var(--text-secondary) !important;
+}
+
+/* Sidebar */
+.form-sidebar .card {
+    position: sticky;
+    top: var(--spacing-lg);
+}
+
+.sidebar-header {
+    padding-bottom: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.sidebar-header h3 {
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.publish-meta {
+    margin: var(--spacing-md) 0;
+    padding: var(--spacing-md);
+    background: var(--bg-tertiary);
+    border-radius: var(--radius-md);
+    font-size: 0.9rem;
+}
+
+.sidebar-actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-lg);
+}
+
+.btn-full {
+    width: 100%;
+}
+
+.mt-4 {
+    margin-top: 1rem;
+}
+
+.col-span-full {
+    grid-column: 1 / -1;
+}
+
+@media (max-width: 1024px) {
+    .post-form-layout {
+        grid-template-columns: 1fr;
+    }
+}

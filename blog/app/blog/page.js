@@ -1,30 +1,44 @@
 import Link from 'next/link';
-import { getAllPosts } from '@/lib/posts';
+import { query } from '@/lib/db';
 
-export default function BlogPage() {
-    const posts = getAllPosts();
+async function getPublishedPosts() {
+    const posts = await query(`
+    SELECT p.*, u.name as author_name 
+    FROM posts p 
+    LEFT JOIN users u ON p.author_id = u.id 
+    WHERE p.status = 'published' AND p.published_at <= NOW()
+    ORDER BY p.published_at DESC
+  `);
+    return posts;
+}
+
+export default async function BlogIndexPage() {
+    const posts = await getPublishedPosts();
 
     return (
         <div className="blog-container">
             <header className="blog-header">
-                <h1>Blog</h1>
-                <p>Thoughts, tutorials, and insights on web development</p>
+                <h1>Latest Articles</h1>
+                <p>Explore our collection of thoughts and tutorials.</p>
             </header>
 
             <div className="posts-grid">
                 {posts.length === 0 ? (
-                    <p className="no-posts">No posts available yet.</p>
+                    <p className="no-posts">No posts published yet. Check back soon!</p>
                 ) : (
                     posts.map((post) => (
-                        <article key={post.slug} className="post-card">
+                        <article key={post.id} className="post-card">
                             <Link href={`/blog/${post.slug}`}>
                                 <div className="post-content">
                                     <h2>{post.title}</h2>
                                     <div className="post-meta">
-                                        <span className="post-author">{post.author}</span>
-                                        <span className="post-date">{post.date}</span>
+                                        <span>{post.author_name}</span>
+                                        <span>•</span>
+                                        <span>{new Date(post.published_at).toLocaleDateString()}</span>
                                     </div>
-                                    <p className="post-excerpt">{post.excerpt}</p>
+                                    <p className="post-excerpt">
+                                        {post.excerpt || post.content.substring(0, 150) + '...'}
+                                    </p>
                                     <span className="read-more">Read more →</span>
                                 </div>
                             </Link>

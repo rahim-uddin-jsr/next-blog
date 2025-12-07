@@ -31,13 +31,19 @@ export default function LoginPage() {
                 return;
             }
 
-            // Redirect to blog page on success
-            router.push('/blog');
+            // Redirect based on role
+            const userRole = data.user?.role;
+            if (['editor', 'admin', 'super_admin'].includes(userRole)) {
+                router.push('/admin');
+            } else {
+                router.push('/blog');
+            }
             router.refresh();
         } catch (err) {
             setError('An error occurred. Please try again.');
             setLoading(false);
         }
+
     };
 
     return (
